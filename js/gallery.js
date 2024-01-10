@@ -93,7 +93,7 @@ function handleProductClick(event) {
 
   event.preventDefault();
   const instance = basicLightbox.create(`
-    <img src="${original}" width="1112" height="640">
+    <img src="${event.target.dataset.original}" width="1112" height="640">
 `);
 
   instance.show();
