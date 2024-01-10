@@ -87,10 +87,13 @@ galleryList.insertAdjacentHTML("afterbegin", galleryItem);
 galleryList.addEventListener("click", handleProductClick);
 
 function handleProductClick(event) {
-  console.log(event.target);
+  if (event.target === event.curentTarget) {
+    return;
+  }
+
   event.preventDefault();
   const instance = basicLightbox.create(`
-    <img src="${original}" width="800" height="600">
+    <img src="${original}" width="1112" height="640">
 `);
 
   instance.show();
