@@ -97,21 +97,19 @@ function handleProductClick(event) {
     <img src="${event.target.dataset.source}" width="1112" height="640">
 `,
     {
-      onShow: (instance) => {
-        document.addEventListener("keydown", (e) => {
-          if (e.code === "Escape") {
-            instance.close();
-          }
-        });
+      onShow: () => {
+        document.addEventListener("keydown", closeEl);
       },
-      onClose: (instance) => {
-        document.removeEventListener("keydown", (e) => {
-          if (e.code === "Escape") {
-            instance.close();
-          }
-        });
+      onClose: () => {
+        document.removeEventListener("keydown", closeEl);
       },
     }
   );
   instance.show();
+
+  function closeEl(e) {
+    if (e.code === "Escape") {
+      instance.close();
+    }
+  }
 }
