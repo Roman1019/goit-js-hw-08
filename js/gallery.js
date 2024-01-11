@@ -90,16 +90,28 @@ function handleProductClick(event) {
   if (event.target === event.curentTarget) {
     return;
   }
-
   event.preventDefault();
-  const instance = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" width="1112" height="640">
-`);
 
-  instance.show();
-  document.addEventListener("keydown", (e) => {
-    if (e.code == "Escape") {
-      instance.close();
+  const instance = basicLightbox.create(
+    `
+    <img src="${event.target.dataset.source}" width="1112" height="640">
+`,
+    {
+      onShow: (instance) => {
+        document.addEventListener("keydown", (e) => {
+          if (e.code === "Escape") {
+            instance.close();
+          }
+        });
+      },
+      onClose: (instance) => {
+        document.removeEventListener("keydown", (e) => {
+          if (e.code === "Escape") {
+            instance.close();
+          }
+        });
+      },
     }
-  });
+  );
+  instance.show();
 }
