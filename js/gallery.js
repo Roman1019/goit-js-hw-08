@@ -93,8 +93,13 @@ function handleProductClick(event) {
 
   event.preventDefault();
   const instance = basicLightbox.create(`
-    <img src="${event.target.dataset.original}" width="1112" height="640">
+    <img src="${event.target.dataset.source}" width="1112" height="640">
 `);
 
   instance.show();
+  document.addEventListener("keydown", (e) => {
+    if (e.code == "Escape") {
+      instance.close();
+    }
+  });
 }
