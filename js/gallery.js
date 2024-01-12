@@ -64,6 +64,8 @@ const images = [
   },
 ];
 
+const galleryList = document.querySelector(".gallery");
+
 const galleryItem = images
   .map(
     ({ preview, original, description }) =>
@@ -81,16 +83,14 @@ const galleryItem = images
   )
   .join("");
 
-const galleryList = document.querySelector(".gallery");
 galleryList.insertAdjacentHTML("afterbegin", galleryItem);
-
 galleryList.addEventListener("click", handleProductClick);
 
 function handleProductClick(event) {
-  if (event.target === event.curentTarget) {
+  event.preventDefault();
+  if (event.target.nodeName !== "IMG") {
     return;
   }
-  event.preventDefault();
 
   const instance = basicLightbox.create(
     `
